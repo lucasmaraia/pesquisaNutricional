@@ -1,0 +1,14 @@
+form {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 1000px;
+    padding: 1em;
+    
+}
+
+
+body {
+
+    background-image: url(fundo.jpg);
+    background-size: 90% ;
+}
