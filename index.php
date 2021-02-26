@@ -44,6 +44,8 @@
          <br>
          <div class="   col-md-6 offset-md-3">
           <center> <button type="submit" class="btn btn-primary" >Enviar</button> </center>
+
+          <center> <h7>Copyright © 2021 Lucas Clinio Maraia <h7> </center>
       </form>
    </body>
 </html>
