@@ -10,6 +10,9 @@ form {
 body {
 
     background-image: url(fundo.jpg);
-    background-size: 90% ;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    background-attachment: fixed;
 }
 
