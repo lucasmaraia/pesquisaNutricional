@@ -44,11 +44,31 @@ CREATE TABLE formulario (
 );
 ```
 
+## Configuração
+
+A conexão com o banco é lida de variáveis de ambiente, com valores padrão para um MySQL local:
+
+| Variável      | Padrão      |
+|---------------|-------------|
+| `DB_HOST`     | `localhost` |
+| `DB_USER`     | `root`      |
+| `DB_PASSWORD` | vazio       |
+| `DB_NAME`     | `pesquisa_nutricional` |
+
+```bash
+export DB_HOST="localhost"
+export DB_USER="root"
+export DB_PASSWORD="sua-senha"
+export DB_NAME="pesquisa_nutricional"
+```
+
+No Windows (PowerShell), use `$env:DB_USER = "root"`.
+
 ## Como rodar
 
 1. Suba um ambiente com PHP e MySQL (XAMPP, Laragon ou `docker run -d -p 3306:3306 mysql`).
 2. Crie a tabela acima.
-3. Ajuste as credenciais em `conexao.php`.
+3. Configure as variáveis de ambiente do banco (veja a seção acima).
 4. Sirva a pasta:
 
 ```bash
@@ -61,7 +81,7 @@ php -S localhost:8000
 
 Este projeto tem problemas que eu não repetiria hoje, e os mantenho documentados por honestidade histórica:
 
-- **Credenciais no repositório.** O `conexao.php` tem host, usuário e senha de um banco ClearDB do Heroku escritos no código. O serviço foi descontinuado e as credenciais estão mortas, mas o padrão certo é usar variáveis de ambiente e manter o arquivo fora do versionamento.
+- ~~**Credenciais no repositório.**~~ O `conexao.php` trazia host, usuário e senha de um banco ClearDB do Heroku escritos no código. **Corrigido:** a conexão agora vem de variáveis de ambiente. As credenciais antigas seguem no histórico de commits, mas o serviço ClearDB foi descontinuado e elas estão mortas.
 - **SQL injection.** O `INSERT` é montado por concatenação direta dos valores de `$_POST`, sem escape nem *prepared statements*. Em código novo, use `mysqli_prepare` com parâmetros vinculados.
 - **`'now()'` como string.** A data de cadastro é gravada como o texto literal `now()` em vez da função SQL, porque está entre aspas simples. O correto seria `NOW()` fora das aspas, ou uma coluna `TIMESTAMP DEFAULT CURRENT_TIMESTAMP`.
 - Sem validação no servidor (apenas o `required` do HTML) e sem feedback de sucesso para o usuário.
